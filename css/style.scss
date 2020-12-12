@@ -1,0 +1,3584 @@
+$breakpoints: (
+    "ss": "screen and (min-width: 450px)",
+    "tb": "screen and (min-width: 600px)",
+    "sm": "screen and (min-width: 768px)",   
+    "md": "screen and (min-width: 1080px)",
+    "lg": "screen and (min-width: 1200px)",
+    "xl": "screen and (min-width: 1500px)"
+) !default;
+
+@mixin mq($breakpoint: md) {
+    @media #{map-get($breakpoints, $breakpoint)} {
+        @content;
+    }
+}
+
+$color : #49BCBD;
+$text-color: #403731;
+
+* {   
+    font-family:  'コーポレート明朝','Noto Serif JP', serif;
+    box-sizing: border-box;
+    margin-top: 0;
+    color: $text-color;
+  }
+  
+  html, body, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, p, div, span, img, a, table, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+  }
+  
+  header, footer, nav, section, article, aside, figure, figcaption {
+    display: block;
+  }
+  
+
+  _::-webkit-full-page-media, _:future, :root body {
+    font-family: 'Noto Serif JP', serif;
+}
+  
+  ol, ul {
+    list-style: none;
+    list-style-type: none;
+  }
+
+body {
+    line-height: 1.5;
+    background-color: #FFF;
+    display: block;
+    margin: 0 auto;
+    transform-box: fill-box !important;
+    -webkit-appearance: none;
+    }
+
+ //chromeにsafari CSSハック避ける
+@supports (-webkit-touch-callout: none) {
+    body {
+      height: -webkit-fill-available;
+    }
+  }
+
+    .clear::after {
+        display: block;
+        clear: both;
+        content: "";
+    }
+    
+    img {
+    width: 100%;
+    display: block;
+    }
+
+    img[src$=".svg"] {
+        width: 100%;
+    }
+    
+    a {
+    color: $color;
+    text-decoration: none;
+    }
+    
+    .container {
+    width: 87%;
+    max-width:1180px;
+    margin: auto;
+        @include mq('sm') {
+            width: 80%;
+        }
+        @include mq('md') {
+            width: 85%;
+        }
+    }
+    
+    .fadein {
+        opacity : 0.1;
+        transform : translate(0, 50px);
+        transition : all 500ms;
+        transition: 0.3s;
+        }
+    
+    .fadein.scrollin {
+        opacity : 1;
+        transform : translate(0, 0);
+        transition: 0.3s;
+        }
+
+//スマホのみ
+    .sp-only {
+        display: inline-block;
+        @include mq('sm') {
+            display: none;
+        }
+    }
+
+//タブレットのみ
+  .tb-only {
+      display: none;
+      @include mq('sm') {
+          display: block;
+      }
+      @include mq('md') {
+          display: none;
+      }
+  }
+   
+//PCのみ
+    .pc-only {
+        display: none;
+        @include mq('md') {
+            display: block;
+        }
+    }
+
+//スマホタブレットのみ
+    .st-only {
+        @include mq('md') {
+            display: none;
+        }
+    }
+
+//タブレットPCのみ
+    .tp-only {
+        display: none;
+        @include mq('sm') {
+            display: block;
+        }
+    }
+
+
+//SPページトップタイトル
+.page-title {
+    text-align: center;
+    font-size: 39px;
+    color: #FCC800;
+    letter-spacing: 3.9px;
+    font-family: 'Shree Devanagari 714';
+    font-family: "コーポレート明朝", "Noto Serif JP", "serif";
+    @include mq('sm') {
+        display: none;
+    }
+}
+.page-sub-title {
+    text-align: center;
+    color:#FCC800;
+    padding-bottom: 100px;
+    @include mq('sm') {
+        display: none;
+    }
+}
+
+//ハンバーガーメニュー
+nav.NavMenu{
+    position: fixed; 
+    z-index: 100; 
+    top: 0; 
+    right: 0; 
+    background-color: $color;
+    color: #fff; 
+    width: 100%;
+   min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+    transform: translateX(100%);
+    padding-top: 15px;
+    .nav-img {
+        width: 150px;
+        display: block;
+        margin: 0 auto;
+        padding-bottom: 40px;
+    }
+    ul{
+        background-color: $color; 
+        width: 100%;
+        margin: 0 auto;
+        padding: 0;
+        &:hover {
+            color: #FFF000;
+        }
+        li{
+            font-size: 20px;
+            list-style-type: none;
+            text-align: center;
+            transition: 0.3s;
+            &:hover {
+                color: #FFF000;
+            }
+            &:nth-last-child() {
+                padding-bottom: 0;
+                border-bottom: none; 
+            }
+            @include mq('sm') {
+                font-size: 24px;
+                font-weight: bold;
+            }
+            a {
+                display: block; 
+                color: #fff;
+                padding: 10px 0;
+                margin-bottom: 20px;
+                &:hover {
+                    color: #FFF000;
+                }
+            }
+            }
+        }
+    }
+    
+nav.NavMenu.active{
+    transform: translateX(0%);
+    }
+ 
+.Toggle {
+    display: block;
+    position: fixed;   
+    right: 0px;
+    top: 0px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    z-index: 200;
+    background-color: $color;
+    @include mq('md') {
+        display: none;
+    }
+    span {
+        display: block;
+    position: absolute;
+    width: 30px;
+    border-bottom: solid 3px #fff;
+    -webkit-transition: .35s ease-in-out;
+    -moz-transition: .35s ease-in-out;		
+    transition: .35s ease-in-out;		
+    left: 9px;
+    &:nth-child(1) {
+        top: 14px;
+    }
+    &:nth-child(2) {
+        top: 24px;
+    }
+    &:nth-child(3) {
+        top: 34px;
+    width: 15px;
+        
+    }
+    }
+}
+ 
+.Toggle.active span:nth-child(1) {
+    top: 20px;
+    left: 8px;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+ 
+.Toggle.active span:nth-child(2) {
+    top: 20px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.Toggle.active span:nth-child(3) {
+    display: none;
+}
+
+.overlay {
+    background-color: #fff;
+    height: 100vh;
+    position: fixed;
+    z-index: 0;
+}
+
+.all-over {
+    z-index: 10 !important;
+    width: 100%;
+}
+.max-inner {
+    max-width: 1800px;
+    display: block;
+    margin: 0 auto;
+}
+
+header {
+    height: 50px;
+    font-family:  'コーポレート明朝','Noto Serif JP', serif;
+    @include mq('md') {
+        height: 80px;
+    }
+    .header-content {
+        display: none;
+        @include mq('md') {
+            display: block; 
+        }
+        .header-inner {
+            max-width: 1440px;
+            display: block;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .header-logo {
+                width: 150px;
+            }
+            .header-list {
+                display: flex;
+                align-items: center;
+                a {
+                    li {
+                        color: #403731;
+                        padding: 0 20px;
+                        font-size: 14px;
+                        padding-top: 5px;
+                    }
+                    &:hover {
+                        li {
+                            color: #4D97FF;
+                        }
+                    }
+                }
+                .header-blue {
+                    background: linear-gradient(90deg, #89F7FE, #4D97FF);
+                    padding: 11px 24px;
+                    margin-left: 20px;
+                    border-radius: 24px;
+                    &:hover {
+                        li {
+                            color: #Fff;
+                            opacity: 0.7;
+                        }
+                    }
+                    li {
+                        color: #fff;
+                        font-weight: bold;
+                        font-size: 16px;
+                        padding-top: 0;
+                    }
+                }
+            }
+        }
+    }
+    .header-sp {
+        img {
+            width: 94px;
+        @include mq('md') {
+            display: none;
+        }
+    }
+        }
+}
+
+
+//共通タイトル
+.section-title {
+    color: $color;
+    font-size: 31px;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 12px;
+    margin-bottom: 25px;
+    position: relative;
+    display: block;
+    font-family: "コーポレート明朝";
+    &:after {
+        position: absolute;
+        content: "";
+        background-color: $color;
+        display: block;
+        margin: auto;
+        right: 0;
+        left: 0;
+        bottom: -5px;
+        height: 7px;
+        width: 50px;
+    }
+    @include mq('sm') {
+        font-size: 54px;
+        letter-spacing: 2.7px;
+        margin-bottom: 35px;
+        &:after {
+            width: 70px;
+            bottom: -5px;
+        }
+    }
+}
+.section-sub-title {
+    text-align: center;
+    display: block;
+    font-size: 20px;
+    font-family: "コーポレート明朝";
+    @include mq('sm') {
+        font-size: 24px;
+    }
+}
+
+//toppage
+.top-wrapper {
+    background-size: 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 120px;
+    @include mq('sm') {
+        padding-top: 311px;
+        background-image: url(/img/top-bg-tb-min.png);
+    }
+    @include mq('md') {
+        padding-top: 508px;
+        padding-bottom: 217px;
+        background-image: url(/img/top-bg-pc-min.png);
+    }
+    .top-sp-img {
+        width: 100%;
+        height: 350px;
+        @include mq('ss') {
+            height: 450px;
+        }
+        @include mq('tb') {
+            height: 500px;
+        }
+        @include mq('sm') {
+            display: none;
+        }
+    }
+    .top-title-item {
+        @include mq('sm') {
+            padding-bottom: 178px;
+        }
+        @include mq('md') {
+            padding-left: 10%;
+        }
+        .top-subtitle {
+            padding-bottom: 18px;
+            font-size: 21px;
+            font-weight: bold;
+            @include mq('md') {
+                padding-bottom: 62px;
+                font-size: 42px;
+            }
+        } 
+        h1 {
+            img {
+                @include mq('md') {
+                    max-width: 1000px;
+                    width: 70%;
+                }
+            }
+        }
+    }
+}
+
+
+//ミッション
+.top-mission-wrapper{
+    @include mq('md') {
+        padding-bottom: 374px;
+    }
+    .top-contents {
+        @include mq('md') {
+            display: flex;
+        flex-direction: row-reverse;
+        }
+        .top-mission-img {
+            position: relative;
+            margin: 0 calc(50% - 50vw);
+            margin-bottom: 64px;
+            &:after {
+                position: absolute;
+                display: block;
+                content: "Mission";
+                font-family:  "コーポレート明朝", "Noto Serif JP", sans-serif !important;
+                color: #EDEDED;
+                font-size: 80px;
+                width: 100%;
+                text-align: center;
+                bottom: -60px;
+                left: 0;
+                right: 0;
+                margin: auto; 
+            }
+            .top-img-sp {
+                display: block;
+                @include mq('sm') {
+                    display: none;
+                }
+            }
+            .top-img-tp {
+                display: none;
+                @include mq('sm') {
+                    display: block;
+                    width: 70%;
+                    margin: 0 auto;
+                }
+                @include mq('md') {
+                    width: 90%;
+                }
+            }
+            @include mq('sm') {
+                margin: 0 auto;
+                width: 100%;
+                margin-bottom: 80px;
+                &:after {
+                    font-size: 134px;
+                    bottom: -100px;
+                } 
+            }
+            @include mq('md') {
+                width: 90%;
+                margin-left: 20px;
+                &:after {
+                    content: "";
+                }
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .top-txt-ctt {
+        @include mq('md') {
+            width: 80%;
+        }
+        .section-title-pc {
+            text-align: left;
+            &:after {
+                left: 0;
+                right: auto;
+            }
+        }
+        .section-sub-title-pc {
+            text-align: left;
+        }
+        .top-btn {
+            @include mq('md') {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+
+//サービス
+.top-service-wrapper{
+    @include mq('sm') {
+        background-image: url(../img/service_Base-min.svg);
+        background-size: 80%;
+        background-repeat: no-repeat;
+        background-position: 0 30%;
+    }
+    @include mq('md') {
+        padding-bottom: 374px;
+        background-size: 55%;
+        background-position: 0 7%;
+    }
+    .top-contents {
+        @include mq('md') {
+            padding-bottom: 50px;
+        }
+        .top-service-img {
+            position: relative;
+            margin: 0 calc(50% - 50vw);
+            margin-bottom: 64px;
+            &:after {
+                position: absolute;
+                display: block;
+                content: "Service";
+                font-family:  "コーポレート明朝", "Noto Serif JP", sans-serif !important;           
+                color: #EDEDED;
+                font-size: 80px;
+                width: 100%;
+                text-align: center;
+                bottom: -60px;
+                left: 0;
+                right: 0;
+                margin: auto; 
+            }
+            .top-img-sp {
+                display: block;
+                @include mq('sm') {
+                    display: none;
+                }
+            }
+            .top-img-tp {
+                display: none;
+                @include mq('sm') {
+                    display: block;
+                    width: 70%;
+                    margin: 0 auto;
+                }
+                @include mq('md') {
+                    width: 90%;
+                }
+            }
+            @include mq('sm') {
+                margin: 0 auto;
+                width: 100%;
+                margin-bottom: 177px;
+                &:after {
+                    font-size: 134px;
+                    bottom: -100px;
+                }
+            }
+            @include mq('md') {
+                width: 90%;
+                &:after {
+                    content: "";
+                }
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .top-txt-ctt {
+        @include mq('md') {
+            width: 80%; 
+            padding-left: 10%;  
+            padding-top: 5%;         
+        }
+        .section-title-pc {
+            text-align: left;
+            &:after {
+                left: 0;
+                right: auto;
+            }
+        }
+        .section-sub-title-pc {
+            text-align: left;
+        }
+        .top-btn {
+            @include mq('md') {
+                margin-right: 0;
+            }
+        }
+    }
+    .top-service-img {
+        @include mq('sm') {
+            display: block;
+            margin-bottom: 174px;
+        } 
+    }
+    .top-big-title-pc {
+        @include mq('lg') {
+            line-height: 0px;
+        }
+    }
+}
+
+//メンバー
+.top-member-wrapper{
+    .top-contents {
+        display: block;
+        .top-text {
+            text-align: center;
+            letter-spacing: 0.8px;
+            @include mq('sm') {
+                text-align: center;
+                padding-bottom: 40px;
+            }
+            @include mq('md') {
+                padding-bottom: 60px;
+            }
+        }
+        .top-member-img {
+            margin: 0 calc(50% - 50vw);
+            padding-bottom: 64px;
+            .top-img-sp {
+                display: block;
+                @include mq('sm') {
+                    display: none;
+                }
+            }
+            .top-img-tp {
+                display: none;
+                @include mq('sm') {
+                    display: block;
+                    width: 70%;
+                    margin: 0 auto;
+                }
+            }
+            @include mq('sm') {
+                margin: 0 auto;
+                width: 100%;
+                margin-bottom: 80px;
+                position: relative;
+                &:after {
+                    position: absolute;
+                    display: block;
+                    content: "Member";
+                    font-family:  "コーポレート明朝", "Noto Serif JP", sans-serif !important;                    
+                    color: #EDEDED;
+                    font-size: 134px;
+                    width: 100%;
+                    text-align: center;
+                    bottom: -30px;
+                    left: 0;
+                    right: 0;
+                    margin: auto; 
+                }
+            }
+            @include mq('md') {
+                &:after {
+                    font-size: 228px;
+                    bottom: -100px;
+                }
+            }
+        } 
+    }
+    .top-big-title-pc {
+        @include mq('md') {
+            line-height: 0px;
+        }
+    }
+}
+
+    .top-contents {
+        font-family:  "コーポレート明朝", sans-serif;
+        padding-bottom: 120px;
+        @include mq('sm') {
+            padding-bottom: 200px;
+        }
+        @include mq('md') {
+            padding-bottom: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        .section-title-sp {
+            color: $color;
+            font-size: 31px;
+            text-align: center;
+            font-weight: bold;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+            position: relative;
+            display: block;
+            letter-spacing: 1.55px; 
+            font-family: "コーポレート明朝";   
+            &:after {
+                position: absolute;
+                content: "";
+                background-color: $color;
+                display: block;
+                margin: 0 auto;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                height: 7px;
+                width: 50px;
+            }
+            @include mq('sm') {
+                font-size: 54px;
+                letter-spacing: 2.7px;
+                &:after {
+                    width: 70px;
+                }
+            }
+            @include mq('md') {
+                display: none;
+            }
+        }
+        .section-sub-title-sp {
+            text-align: center;
+            display: block;
+            font-size: 20px;
+            padding-bottom: 64px;
+            font-family: "コーポレート明朝";
+            @include mq('sm') {
+                font-size: 24px;
+                padding-bottom: 80px;
+            }
+            @include mq('md') {
+                display: none;
+            }
+        }
+            .section-title-pc {
+                display: none;
+                @include mq('md') {
+                color: $color;
+                font-size: 58px;
+                letter-spacing: 6.8px;
+                text-align: center;
+                font-weight: bold;
+                padding-bottom: 12px;
+                margin-bottom: 10px;
+                position: relative;
+                display: block;
+                font-family: "コーポレート明朝";
+                &:after {
+                    position: absolute;
+                    content: "";
+                    background-color: $color;
+                    display: block;
+                    margin: auto;
+                    right: 0;
+                    left: 0;
+                    height: 7px;
+                    width: 50px;
+                }
+                }
+            }
+            .section-sub-title-pc {
+                display: none;
+                font-family: "コーポレート明朝";
+                @include mq('md') {
+                    text-align: center;
+                    display: block;
+                    padding-bottom: 20px;
+                    font-size: 26px;
+                }            
+            }
+            .top-text {
+                font-size: 16px;
+                line-height: 32px;
+                color: $text-color;
+                padding-bottom: 32px;
+                font-family:  "コーポレート明朝";
+                @include mq('sm') {
+                    padding-bottom: 64px;
+                    width: 70%;
+                    display: block;
+                    margin: 0 auto;
+                }
+                @include mq('md') {
+                    padding-bottom: 30px;
+                    width: 100%;
+                }
+            }
+        .top-btn {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            width: 180px;
+            
+            a {
+                img {
+                    width: 180px;
+                }
+            }
+        }
+    }
+    .top-big-title-pc {
+        display: none;
+        @include mq('md') {
+        color: #EDEDED;
+        font-family: "コーポレート明朝", serif;
+        font-size: 240px;
+        display: block;
+        text-align: center;
+        line-height: 200px;
+        }
+    }
+    
+    //下部問い合わせセクション
+    .contact-btm-wrapper {
+        background-image: url(../img/bottom_Back_wave-sp-min.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding-top: 83px;
+        padding-bottom: 64px;
+        @include mq('sm') {
+            padding-top: 160px;
+            padding-bottom: 100px;
+            background-image: url(../img/bottom_back-tb.png);
+        }
+        @include mq('md') {
+            padding-top: 268px;
+            background-image: url(/img/bottom_Back_wave.png);
+        }
+        .contact-btm-items {
+            width: 100%;
+            display: block;
+            margin: 0 auto;
+            @include mq('sm') {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                max-width: 600px;
+            }
+            @include mq('md') {
+                max-width: 900px;
+            }
+            @include mq('lg') {
+                max-width: 1100px;
+            }
+                    .contact-btm-item {
+                        width: 270px;
+                        height: 270px;
+                        border: 4px solid #fff;                                         
+                        border-radius: 30px;
+                        margin: 0 auto;
+                        margin-bottom: 29px;
+                        @include mq('md') {
+                            width: 400px;
+                            height: 400px;
+                        }
+                        @include mq('lg') {
+                            height: 500px;
+                            width: 500px;
+                        }
+                        .contact-item {                    
+                            p {
+                                color: #Fff;
+                                text-align: center;
+                            }
+                            a {
+                                color: #fff;
+                            }                           
+                            .contact-btm-title {
+                                font-size: 31px;
+                                font-weight: bold;
+                                text-align: center;
+                                letter-spacing: 1.55px;
+                                font-family:  "コーポレート明朝";
+                                @include mq('md') {
+                                    font-size: 40px;
+                                    letter-spacing: 2.4px;
+                                }
+                                @include mq('lg') {
+                                    font-size: 48px;
+                                    padding-bottom: 10px;
+                                }
+                            }
+                        }
+                        .contact-item-1 {
+                            padding-top: 30px;
+                            @include mq('md') {
+                                padding-top: 60px;
+                            }
+                            @include mq('lg') {
+                                padding-top: 100px;
+                            }
+                            .contact-btm-txt-1 {
+                                font-size: 10px;
+                                padding-bottom: 14px;
+                                @include mq('md') {
+                                    font-size: 14px;
+                                }
+                                @include mq('lg') {
+                                    font-size: 16px;
+                                }
+                            }
+                            .contact-btm-tel {
+                                font-size: 25px;
+                                text-align: center;
+                                padding-bottom: 10px;
+                                @include mq('md') {
+                                    font-size: 36px;
+                                    line-height: 42px;
+                                }
+                                @include mq('lg') {
+                                    font-size: 42px;
+                                }
+                            }
+                            .contact-btm-time {
+                                font-size: 10px;
+                                padding-bottom: 28px;
+                                @include mq('md') {
+                                    font-size: 14px;
+                                    padding-bottom: 40px;
+                                }
+                                @include mq('lg') {
+                                    font-size: 16px;
+                                }
+                            }
+                            .contact-btm-form {
+                                text-align: center;
+                                a {
+                                    color: $color;
+                                    font-size: 16px;
+                                    padding: 13px 15px;
+                                    border-radius: 7px;
+                                    font-weight: bold;
+                                    background-color: #fff;
+                                    @include mq('md') {
+                                        padding: 18px 30px;
+                                    }
+                                }
+                            }
+                        }
+                        .contact-item-2 {
+                            padding-top: 40px;
+                            @include mq('md') {
+                                padding-top: 70px;
+                            }
+                            @include mq('lg') {
+                                padding-top: 110px;
+                            }
+                            .contact-btm-title-2 {
+                                padding-bottom: 12px;
+                            }
+                            .contact-btm-txt-2 {
+                                font-size: 10px;
+                                padding-bottom: 28px;
+                                line-height: 16px;
+                                @include mq('md') {
+                                    font-size: 14px;
+                                    line-height: 32px;
+                                    padding-bottom: 40px;
+                                }
+                                @include mq('lg') {
+                                    font-size: 16px;
+                                }
+                            }
+                            .contact-btn {
+                                display: block;
+                                margin: 0 auto;
+                                text-align: center;
+                                width: 150px;
+                                a {
+                                    img {
+                                        width: 150px;
+                                        text-align: center;
+                                        display: block;
+                                        margin: 0 auto;
+                                    }
+                                }
+                            }
+                        }
+                    }
+        }
+    }
+
+    footer {
+        background-color: #00377E;
+        padding-top: 40px;
+        padding-bottom: 24px;
+        font-family:  'コーポレート明朝','Noto Serif JP', serif;
+        @include mq('md') {
+            padding-bottom: 40px;
+        }
+        .footer-items {
+            @include mq('sm') {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .footer-center {
+                @include mq('sm') {
+                    order: 2;
+                    width: 70%;
+                }
+                @include mq('lg') {
+                    width: 55%;
+                }
+                .footer-list {
+                    @include mq('sm') {
+                        margin-bottom: 20px;
+                    }
+                    @include mq('md') {
+                        margin-bottom: 0;
+                    }
+                    a {
+                        li {
+                            color: #Fff;
+                            text-align: center;
+                            line-height: 44px;
+                            @include mq('sm') {
+                                padding: 0 20px;
+                                padding-bottom: 0;
+                                line-height: 20px;
+                                margin-bottom: 20px;
+                                display: inline-block;
+                                border-right: 1px solid #fff;
+                                font-size: 14px;
+                            }
+                        }
+                        &:hover {
+                            li {
+                                opacity: 0.7;
+                            }
+                        }
+                    }
+                }
+                .footer-link {
+                    margin-bottom: 30px;
+                    @include mq('sm') {
+                        padding-left: 20px;
+                        margin-bottom: 20px;
+                    }
+                    @include mq('md') {
+                        margin-bottom: 0;
+                    }
+                    a {
+                        li {
+                            color: #Fff;
+                            text-align: center;
+                            padding-bottom: 20px;
+                            @include mq('sm') {
+                                text-align: left;
+                                display: inline-block;
+                                font-size: 14px;
+                                padding-bottom: 10px;
+                                &:nth-child(1) {
+                                    padding-right: 20px;
+                                }
+                            }
+                        }
+                        &:hover {
+                            li {
+                                opacity: 0.7;
+                            }
+                        }
+                    }
+                }
+                .footer-sns {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    @include mq('sm') {
+                        justify-content: left;
+                    }
+                    margin-bottom: 30px;
+                    li {
+                        padding: 0 30px;
+                        @include mq('sm') {
+                            padding: 20px;
+                        } 
+                        img {
+                            width: 30px;
+                            &:hover {
+                                opacity: 0.7;
+                            }
+                        }
+                    }
+                }
+            }
+            .footer-logo {
+                display: block;
+                width: 50%;
+                margin: 0 auto;
+                padding-bottom: 38px;
+                @include mq('sm') {
+                    order: 1;
+                    width: 30%;
+                    margin: 0;
+                    padding-right: 37px;
+                }
+                @include mq ('lg') {
+                    width: 15%;
+                    padding-right: 0;
+                }
+            }
+            .footer-cp {
+                text-align: center;
+                color: #fff;
+                br {
+                    display: block;
+                    @include mq('sm') {
+                        display: none;
+                    }
+                    @include mq('lg') {
+                        display: block;
+                    }
+                }
+                @include mq('sm') {
+                    order: 3;
+                    width: 100%;
+                    font-size: 14px;
+                }
+                @include mq('lg') {
+                    width: 22%;
+                    line-height: 24px;
+                }
+            }
+        }
+    }
+
+    //about 
+    .about-bg {
+        padding-bottom: 37px;
+        position: relative;
+        @include mq('sm') {
+            padding-bottom: 96px;
+        }
+        @include mq('md') {
+            padding-bottom: 175px;
+        }
+        .about-top-sp {
+            display: block;
+            @include mq('sm') {
+                display: none;
+            }
+        }
+        .about-top-tb {
+            display: none;
+            @include mq('sm') {
+                display: block;
+            } 
+            @include mq('md') {
+                display: none;
+            }
+        }
+        .about-top-pc {
+            display: none;
+            @include mq('md') {
+                display: block;
+            }
+        }
+        .about-top-title {
+            display: none;
+            @include mq('sm') {
+            width: 140px;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 100px;
+            }
+            @include mq('md') {
+                width: 170px;
+            }
+            img {
+                @include mq('sm') {
+                    width: 140px;
+                }
+                @include mq('md') {
+                    width: 170px;
+                }
+            }
+        }
+    }
+
+    .about-top-wrapper {
+        padding-bottom: 120px;
+        @include mq('sm') {
+            padding-bottom: 200px;
+        }
+        .about-top-contents {
+            @include mq('md') {
+                display: flex;
+                justify-content: space-between;
+            }
+            .about-top-left {
+                @include mq('md') {
+                    width: 30%;
+                    margin-right: 50px;
+                }
+                @include mq('lg') {
+                    width: 40%;
+                }
+                .section-title {
+                    text-align: center;
+                    @include mq('md') {
+                        text-align: left;
+                    }
+                    &:after {
+                        @include mq('md') {
+                            left: 0;
+                            right: auto;
+                        }
+                    }
+                }
+                .section-sub-title {
+                    padding-bottom: 63.5px;
+                    @include mq('sm') {
+                        padding-bottom: 59px;
+                    }
+                    @include mq('md') {
+                        text-align: left;
+                        padding-bottom: 86px;
+                    }
+                    
+                }
+                .about-top-img {
+                    display: none;
+                    @include mq('md') {
+                        display: block;
+                        margin-left: 0;
+                        width: 70%;
+                        margin-right: auto;
+                    }
+                }
+            }
+            .about-top-right {
+                @include mq('sm') {
+                    width: 70%;
+                    display: block;
+                    margin: 0 auto;
+                }
+                @include mq('md') {
+                    width: 65%;
+                }
+                @include mq('lg') {
+                    width: 55%;
+                }
+                p {
+                    color: $text-color;
+                    font-size: 16px;
+                }
+                .about-top-txt {
+                    line-height: 32px;
+                    letter-spacing: 0.8px;
+                    padding-bottom: 24px;
+                }
+                .about-msg {
+                    padding-bottom: 48px;
+                }
+                .about-top-name {
+                    text-align: right;
+                    line-height: 28px;
+                    font-size: 16px;
+                    padding-bottom: 40px;
+                    @include mq('sm') {
+                        padding-bottom: 80px;
+                    }
+                    @include mq('md') {
+                        font-size: 20px;
+                        line-height: 50px;
+                        padding-bottom: 0;
+                    }
+                }
+            }   
+        }
+        .about-top-img-sp {
+            margin: 0 calc(50% - 50vw);
+            display: block;
+            width: 100%;
+            @include mq('sm') {
+                display: none;
+            }
+        }
+        .about-top-img-tb {
+            display: none;
+            @include mq('sm') {
+                display: block;
+                width: 80%;
+                margin: 0 auto;
+            }
+            @include mq('md') {
+                display: none;
+            }
+        }
+        .about-big-title {
+            img {
+                display: none;
+                @include mq('md') {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    //社員紹介
+    .people-wrapper {
+        padding-bottom: 168px;
+        @include mq('sm') {
+            background-image: url(/img/people_base-min.svg);
+                background-repeat: no-repeat;
+                background-size: 90%;
+                background-position: 20% 35%;
+                padding-bottom: 200px;
+        }
+        @include mq('md') {
+            background-size: 55%;
+            background-position: 45% 52%;
+        }
+        .section-sub-title {
+            padding-bottom: 80px;
+            @include mq('md') {
+                padding-bottom: 176px;
+            }
+        }
+        .people-contents {
+            @include mq('sm') {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                
+            }
+            .people-item {
+                position: relative;
+                margin-bottom: 32px;
+                @include mq('sm') {
+                    width: 45%;
+                    margin-bottom: 0;
+                    &:nth-child(1) {
+                        margin-bottom: 63px;
+                    }
+                    &:nth-child(2) {
+                        margin-bottom: 63px;
+                    }
+                }
+                @include mq('md') {
+                    width: 23%;
+                    &:nth-child(1) {
+                        margin-bottom: 0px;
+                    }
+                    &:nth-child(2) {
+                        margin-bottom: 0px;
+                    }
+                }
+                .people-img {
+                    width: 75%;
+                    display: block;
+                    margin: 0 auto;
+                    border-radius: 20px;
+                    box-shadow: 0 0 8px gray;
+                    @include mq('sm') {
+                        width: 100%;
+                    }
+                }
+                .people-text {
+                    background-color: #fff;
+                    position: absolute;
+                    padding: 10px 20px;
+                    top: 70%;
+                    left: 0%;
+                    @include mq('sm') {
+                        left: -10%;
+                    }
+                    @include mq('md') {
+                        left: -7%;
+                    }
+                    p {
+                        color: $text-color;
+                    }
+                    .people-position {
+                        font-size: 12px;
+                    }
+                    .position-name {
+                        font-size: 16px;
+                    }
+                    .position-english {
+                        font-size: 11px;
+                    }
+                }
+            }
+        }
+        .people-big-title {
+            img {
+                display: none;
+                @include mq('sm') {
+                    display: block;
+                }
+                @include mq('md') {
+                    width: 60%;
+                    margin: 0 auto;
+                    max-width: 692px;
+                }
+            }
+        }
+    }
+
+//会社概要
+    .company-wrapper {
+        .company-contents {
+            padding-bottom: 80px;
+            @include mq('md') {
+                display: flex;
+                justify-content: space-between;
+            }
+            .section-title {
+                @include mq('md') {
+                    text-align: left;
+                    &:after {
+                        left: 0;
+                        right: auto;
+                    }
+                }
+            }
+            .section-sub-title {
+                text-align: center;
+                @include mq('md') {
+                    text-align: left;
+                }
+            }
+            .section-sub-title {
+                padding-bottom: 99.5px;
+                border-bottom: 2px solid #403731;
+                @include mq('md') {
+                    border-bottom: none;
+                }
+            }
+            .st-contents {
+                @include mq('md') {
+                    width: 40%;
+                }
+                @include mq('lg') {
+                    width: 32%;
+                }
+            }
+            .company-txt-ctt {
+                @include mq('md') {
+                    width: 60%;
+                }
+                @include mq('lg') {
+                    width: 68%;
+                }
+                .company-txt-item {
+                    padding: 18px 0;
+                    border-bottom: 0.5px solid #403731;
+                    @include mq('sm') {
+                        display: flex;
+                        align-items: center;
+                        justify-content: left;
+                    }
+                    p {
+                        text-align: center;
+                        @include mq('sm') {
+                            text-align: left;
+                        }
+                    }
+                    .company-txt-title {
+                        font-weight: bold;
+                        line-height: 32px;
+                        padding-bottom: 9.5px;
+                        @include mq('sm') {
+                            width: 25%;
+                            padding-bottom: 0;
+                        }
+                    }
+                    .company-txt {
+                        line-height: 32px;
+                        @include mq('sm') {
+                            width: 75%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+ //アクセス   
+    .about-access-wrapper {
+        .about-map {
+        margin: 0 calc(50% - 50vw);
+        padding-top: 100%;
+        position: relative;
+        margin-bottom: 24px;
+        @include mq('sm') {
+            padding-top: 350 / 768 * 100%;
+        }
+        @include mq('md') {
+            padding-top: 344 / 1364 * 100%;
+            margin: 0 auto;
+            margin-bottom: 24px;
+        }
+            iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+        }
+        .about-access-text {
+            line-height: 32px;
+            font-size: 16px;
+        }
+    }
+
+    //service
+    .service-bg {
+        position: relative;
+        padding-bottom: 37px;
+        @include mq('sm') {
+            padding-bottom: 200px;
+        }
+        @include mq('md') {
+            padding-bottom: 297px;
+        }
+        .service-top-sp {
+            display: block;
+            @include mq('sm') {
+                display: none;
+            }
+        }
+        .service-top-tb {
+            display: none;
+            @include mq('sm') {
+                display: block;
+            }
+            @include mq('md') {
+                display: none;
+            }
+        }
+        .service-top-pc {
+            display: none;
+            @include mq('md') {
+                display: block;
+            }
+        }
+        .service-top-title {
+            display: none;
+            @include mq('sm') {
+            width: 140px;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 100px;
+            }
+            @include mq('md') {
+                width: 170px;
+            }
+        }
+    }
+
+    .service-wrapper {
+        .page-sub-title {
+            padding-bottom: 160px;
+        }
+        .service-contents {
+            .service-item {
+                position: relative;
+                &:nth-child(1) {
+                    padding-bottom: 166px;
+                }
+                &:nth-child(2) {
+                    padding-bottom: 166px;
+                }
+                @include mq('sm') {
+                    height: 900px;
+                }
+                @include mq('md') {
+                    height: 1400px;
+                }
+                .service-title {
+                    display: flex;
+                    align-items: center;
+                    position: absolute;
+                    top: -60px;
+                    @include mq('md') {
+                        padding-left: 5%;
+                    }
+                    p {
+                        color: $color;
+                    }
+                    .service- {
+                        font-size: 80px;
+                        @include mq('sm') {
+                            display: none;
+                        }
+                    }
+                    .service-title-txt {
+                        position: relative;
+                        padding-left: 50px;
+                        &:after {
+                            position: absolute;
+                            content: "";
+                            background-color: $color;
+                            height: 5px;
+                            width: 40px;
+                            left: 0;
+                            top: 40%;
+                            z-index: 100;
+                        }
+                        @include mq('sm') {
+                            padding-left: 100px;
+                            &:after {
+                                width: 80px;
+                            }
+                        }
+                        @include mq('md') {
+                            padding-left: 200px;
+                            &:after {
+                                width: 170px;
+                            }
+                        }
+                        .service-title-top {
+                            font-size: 20px;
+                            line-height: 0;
+                            text-align: center;
+                            font-family: "コーポレート明朝", "Noto Serif JP", "serif";
+                            position: relative;
+                            z-index: 100;
+                            @include mq('sm') {
+                                font-size: 24px;
+                                text-align: center;
+                            }
+                            @include mq('md') {
+                                font-size: 32px;
+                            }
+                        }
+                        .service-title-number {
+                            font-size: 80px;
+                            line-height: 120px;
+                            position: relative;
+                            z-index: 100;
+                            font-family: "コーポレート明朝", "Noto Serif JP", "serif";
+                            @include mq('sm') {
+                                font-size: 100px;
+                                line-height: 160px;
+                            }
+                            @include mq('md') {
+                                font-size: 137px;
+                                line-height: 210px;
+                            }
+                        }
+                    }   
+                }
+                .service-img {
+                    padding-bottom: 37px;
+                    @include mq('sm') {
+                        width: 50%;
+                        position: relative;
+                        z-index: 0;
+                        margin-left: 10%;
+                        display: block;
+                        border-radius: 50px;
+                    }
+                    @include mq('md') {
+                        display: block;
+                        margin-left: auto;
+                        width: 50%;
+                        max-width: 940px;
+                    }
+                }
+                .service-text-contents {
+                    background-color: #fff;
+                    @include mq('sm') {
+                        padding: 40px;
+                        width: 60%;
+                        position: absolute;
+                        top: 25%;
+                        right: 10%;
+                        box-shadow: 0 0 8px gray;
+                    }
+                    @include mq('md') {
+                        right: auto;
+                        left: 10%;
+                        width: 50%;
+                        top: 15%;
+                        max-width: 674px;
+                        padding: 80px;
+                    }
+                    .service-item-title {
+                        font-size: 18px;
+                        padding-bottom: 24px;
+                        font-weight: bold;
+                        letter-spacing: 0.9px;
+                        @include mq('sm') {
+                            font-size: 26px;
+                        }
+                        @include mq('md') {
+                            padding-bottom: 64px;
+                        }
+                    }
+                    .service-item-txt {
+                        font-size: 16px;
+                        line-height: 28px;
+                        letter-spacing: 0.8px;
+                        @include mq('md') {
+                            line-height: 40px;
+                        }
+                    }
+                }
+            }
+            .s-1 {
+                @include mq('tb'){
+                    background-image: url(../img/b-img-min.svg);
+                    background-size: 80%;
+                    background-repeat: no-repeat;
+                    background-position: 100% -5%;
+                }
+                @include mq('lg') {
+                    background-size: 65%;
+                }
+            }
+            .s-2 {
+                @include mq('tb'){
+                    background-image: url(../img/y-img-tb-min.png);
+                    background-size: 75%;
+                    background-repeat: no-repeat;
+                    background-position: 100% 0%;
+                }
+                @include mq('md') {
+                    background-image: url(../img/y-img.png);
+                    background-size: 75%;
+                    background-repeat: no-repeat;
+                    background-position: 100% 20%;
+                }
+                @include mq('lg') {
+                    background-size: 65%;
+                }
+            }
+            .s-3 {
+                @include mq('tb'){
+                    background-image: url(../img/b-img-min.svg);
+                    background-size: 80%;
+                    background-repeat: no-repeat;
+                    background-position: 100% 0%;
+                }
+                @include mq('lg') {
+                    background-size: 65%;
+                }
+            }
+        }
+    }
+
+    //project 
+    .project-bg {
+        position: relative;
+        padding-bottom: 37px;
+        @include mq('sm') {
+            padding-bottom: 200px;
+        }
+        @include mq('md') {
+            padding-bottom: 297px;
+        }
+        .project-top-sp {
+            display: block;
+            @include mq('sm') {
+                display: none;
+            }
+        }
+        .project-top-tb {
+            display: none;
+            @include mq('sm') {
+                display: block;
+            }
+            @include mq('md') {
+                display: none;
+            }
+        }
+        .project-top-pc {
+            display: none;
+            @include mq('md') {
+                display: block;
+            }
+        }
+        .project-top-title {
+            display: none;
+            @include mq('sm') {
+            width: 140px;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 100px;
+            }
+            @include mq('md') {
+                width: 170px;
+            }
+        }
+    }
+    
+    .project-top-wrapper {
+        position: relative;
+        .top-container {
+            max-width: 1280px;
+            display: block;
+            margin: 0 auto;
+        }
+        .project-top-contents {
+            @include mq('sm') {
+                position: relative;
+                padding-bottom: 110px;
+            }
+            @include mq('md') {
+                margin-bottom: 200px;
+                background: linear-gradient(180deg, #fff 0%, #fff 30%, #EDEDED 30%, #EDEDED 100%);
+            }
+            .project-top-img {
+                width: 100%;
+                padding-bottom: 32px;
+                @include mq('sm') {
+                    right: 0;
+                    width: 75%;
+                    display: block;                    
+                    margin: 0 calc(50% - 50vw);
+                    margin-left: auto;
+                }
+                @include mq('md') {
+                    position: static;
+                    margin-left: auto;
+                }
+            }
+            .project-light-img {
+                width: 17%;
+                display: block;
+                margin: 0 auto;
+                padding-bottom: 12px;
+                @include mq('sm') {
+                    position: absolute;
+                    top: 0;
+                    width: 15%;
+                }
+                @include mq('md') {
+                    position: absolute;
+                    top: 0;
+                }
+            }
+            .project-top-title {
+                @include mq('sm') {
+                    position: absolute;
+                    top: 40%;
+                    left: 15%;
+                }
+                @include mq('md') {
+                    position: absolute;
+                    top: 25%;
+                    left: 15%;
+                }
+                p {
+                font-size: 32px;
+                font-weight: bold;
+                text-align: center;
+                line-height: 56px;
+                padding-bottom: 80px;
+                @include mq('sm') {
+                    bottom: 0;
+                    position: relative;
+                    background-color: #fff;
+                    display: inline;
+                    padding: 8px;         
+                }   
+                @include mq('md') {
+                    font-size: 52px;
+                    line-height: 120px;
+                    letter-spacing: 2.6px;
+                    padding: 15px;
+                }
+            }
+                }       
+        }
+    }
+    .project-title {
+        font-size: 24px;
+        text-align: center;
+        font-weight: bold;
+        line-height: 42px;
+        position: relative;
+        margin-bottom: 80px;
+        &:after {
+            position: absolute;
+            content: "";
+            display: block;
+            background-color: #FCC100;
+            height: 7px;
+            width: 65px;
+            bottom: -24px;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+        @include mq('sm') {
+            line-height: 57px;
+            font-size: 38px;
+            margin-bottom: 100px;
+        }
+        @include mq('md') {
+            font-size: 48px;
+            margin-bottom: 170px;
+            &:after {
+                bottom: -42px;
+                width: 100px;
+            }
+        }
+    }
+
+    //プロジェクト概要
+    .project-about-contents {
+        .project-about-ai {
+            .project-about-txt {
+                text-align: center;
+                font-size: 16px;
+                padding-bottom: 24px;
+                @include mq('sm') {
+                    font-size: 20px;
+                    line-height: 35px;
+                    padding-bottom: 80px;
+                }
+                @include mq('md') {
+                    font-size: 26px;
+                    line-height: 52px;
+                }
+            }
+            .project-about-img-text {
+                display: block;
+                margin: 0 auto;
+                padding-bottom: 54px;
+                width: 82%;
+                max-width: 530px;
+                @include mq('sm') {
+                    width: 82%;
+                }
+                div {
+                    display: flex;
+                    justify-content: space-between;
+                    p {
+                        font-size: 12px;
+                        &:nth-child(2) {
+                            @include mq('ss') {
+                                padding-right: 0px;
+                            }
+                            @include mq('sm') {
+                                padding-right: 10px;
+                            }
+                        }
+                        &:nth-child(3) {
+                            @include mq('ss') {
+                                padding-right: 20px;
+                            }
+                        }
+                        @include mq('sm') {
+                            font-size: 16px;
+                        }
+                        @include mq('md') {
+                            padding-bottom: 111px;
+                        }
+                    }
+                }
+            }
+            .project-about-img {
+                max-width: 510px;
+                margin: 0 auto;
+                display: block;
+                width: 80%;
+            }
+        }
+
+        //実際の会話例
+        .project-ex-talk-contents {
+            background-color: #EDEDED;
+            padding-top: 80px;
+            padding-bottom: 80px;
+            @include mq('sm') {
+                padding-top: 114px;
+                padding-bottom: 120px;
+            }
+            @include mq('md') {
+                max-width: 1180px;
+                display: block;
+                margin: 0 auto;
+            }
+            .project-ex-talk-title {
+                text-align: center;
+                display: block;
+                margin: 0 auto;
+                @include mq('md') {
+                    text-align: left;
+                }
+                p {
+                font-size: 20px;
+                text-align: center;
+                color: #Fff;
+                font-weight: bold;
+                background-color: #38302B;
+                border-radius: 40px;
+                padding: 10px 38px;
+                margin-bottom: 54px;
+                line-height: 35px;
+                display: inline-block;
+                @include mq('sm') {
+                    padding: 15px 45px;
+                    font-size: 26px;
+                    letter-spacing: 1.3px;
+                }
+                }
+            }
+            .project-ex-talk-items {
+                @include mq('sm') {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-around;
+                }
+                .project-ex-talk-item {
+                    width: 170px;
+                    display: block;
+                    margin: 0 auto;
+                    margin-bottom: 23px;
+                    padding-bottom: 40px;
+                    @include mq('sm'){
+                        width: 40%;
+                        max-width: 180px;
+                        margin: 0 55px;
+                        margin-bottom: 0;
+                        padding-bottom: 76px;
+                    }
+                    @include mq('md') {
+                        width: 20%;
+                        max-width: 170px;
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    //AIを活用してできること
+    .project-can-do-wrapper {
+        padding-top: 80px;
+        padding-bottom: 80px;
+        @include mq('sm') {
+            padding-top: 113px;
+            padding-bottom: 113px;
+        }
+        .project-can-do-items {
+            @include mq('md') {
+                max-width: 1000px;
+                display: block;
+                margin: 0 auto;
+            }
+            .project-can-do-item {
+                padding-bottom: 40px;
+                @include mq('sm') {
+                    display: flex;
+                    align-items: center;
+                    padding-bottom: 72px;
+                    justify-content: space-between;
+                }
+                @include mq('md') {
+                    padding-bottom: 80px;
+                }
+                .project-can-do-img {
+                    width: 41%;
+                    display: block;
+                    margin: 0 auto;
+                    padding-bottom: 32px;
+                    @include mq('sm') {
+                        width: 25%;
+                    }
+                    @include mq('md') {
+                        width: 18%;
+                        margin-right: 32px;
+                        margin-left: auto;
+                    }
+                }
+                .project-can-do-txt {
+                    @include mq('sm') {
+                        width: 68%;
+                    }
+                    @include mq('md') {
+                        width: 78%;
+                    }
+                    .project-can-do-title {
+                        font-size: 20px;
+                        font-weight: bold;
+                        text-align: center;
+                        padding-bottom: 12px;
+                        @include mq('sm') {
+                            text-align: left;
+                            font-size: 24px;
+                        }
+                    }
+                    .project-can-do-text {
+                        font-size: 16px;
+                        line-height: 28px;
+                        @include mq('sm') {
+                            font-size: 18px;
+                            line-height: 31.5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+//firefox用
+    @-moz-document url-prefix() {
+        .project-top-title {
+          font-size: 16px !important;
+          width: 100%;
+        }
+      }
+
+//リファーラル
+    .referral-wrapper {
+        padding-bottom: 64px;
+        @include mq('sm') {
+            padding-bottom: 94px;
+        }
+        @include mq('md') {
+            padding-bottom: 121px;
+        }
+        .project-referral-text {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 35px;
+            padding-bottom: 70px;
+            @include mq('sm') {
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 120px;
+            span {
+                padding: 0 5px;
+            }
+            }
+            @include mq('md') {
+                font-size: 26px;
+            }
+        }
+        .referral-about-contents {
+            @include mq('md') {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .referral-text-contents {
+                @include mq('md') {
+                    width: 48%;
+                }
+                .referral-title {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding-bottom: 24px;
+                    @include mq('md') {
+                        justify-content: left;
+                    }
+                    img {
+                        width: 25px;
+                        height: 25px;
+                        display: block;
+                    }
+                    span {
+                        font-size: 20px;
+                        font-weight: bold;
+                        padding-left: 10px;
+                        @include mq('sm') {
+                            font-size: 24px;
+                        }
+                        @include mq('md') {
+                            font-size: 26px;
+                        }
+                    }
+                }
+                .referral-text {
+                    font-size: 18px;
+                    padding-bottom: 40px;
+                    text-align: center;
+                    @include mq('sm') {
+                        width: 70%;
+                        display: block;
+                        margin: 0 auto;
+                        font-size: 24px;
+                        line-height: 42px;
+                        padding-bottom: 70px;
+                    }
+                    @include mq('md') {
+                        text-align: left;
+                        width: 100%;
+                    }
+                }
+            }
+            .referral-img {
+                @include mq('sm') {
+                    width: 81%;
+                    display: block;
+                    margin: 0 auto;
+                }
+                @include mq('md') {
+                    width: 45%;
+                }
+            }
+        }
+    }
+
+    .referral-merit {
+        padding: 50px 0;
+        @include mq('sm') {
+            padding-bottom: 140px;
+        }
+        @include mq('md') {
+            padding-bottom: 120px;
+        }
+        .referral-merit-contents {
+            .referral-merit-top-title {
+                display: block;
+                margin: 0 auto;
+                text-align: center;
+                margin-bottom: 52px;
+                position: relative;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    bottom: -50%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    border-top: 15px solid #FCC800;  
+                    border-right: 15px solid transparent;
+                    border-left: 15px solid transparent;                  
+                }
+                @include mq('sm') {
+                    margin-bottom: 54px;
+                    &:after {
+                        bottom: -60%;
+                    }
+                }
+                @include mq('md') {
+                    margin-bottom: 93px;
+                    &:after {
+                        bottom: -75%;
+                    }
+                }
+                p {
+                    background-color: #FCC800;
+                font-size: 22px;
+                text-align: center;
+                border-radius: 80px;
+                padding: 10px 24px;
+                font-weight: bold;
+                margin-bottom: 52px;
+                display: inline;
+                @include mq('sm') {
+                    padding: 20px 35px;
+                    font-size: 28px;
+                }
+                @include mq('md') {
+                    font-size: 32px;
+                    padding: 30px 64px;
+                }
+                }
+            }
+            .referral-merit-items {
+                @include mq('md') {
+                    display: flex;
+                    justify-content: space-between;
+                }
+                .referral-merit-item {
+                    padding-top: 32px;
+                    padding-bottom: 32px;
+                    box-shadow: 6px 6px 5px 5px rgba(0, 0, 0, 0.29);
+                    margin-bottom: 32px;
+                    @include mq('sm') {
+                        width: 60%;
+                        display: block;
+                        margin: 0 auto;
+                        margin-bottom: 42px;
+                    }
+                    @include mq('md') {
+                        width: 30%;
+                        padding: 30px 30px 60px 30px;
+                    }
+                    .referral-merit-img {
+                        width: 41%;
+                        display: block;
+                        margin: 0 auto;
+                        padding-bottom: 24px;
+                        @include mq('md') {
+                            padding-bottom: 32px;
+                            width: 56%;
+                        }
+                    }
+                    .referral-merit-title {
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 20px;
+                        padding-bottom: 12px;
+                        @include mq('sm') {
+                            font-size: 24px;
+                        }
+                        @include mq('md') {
+                            font-size: 26px;
+                        }
+                    }
+                    .referral-merit-text {
+                        width: 70%;
+                        margin: 0 auto;
+                        display: block;
+                        line-height: 28px;
+                        font-size: 16px;
+                        @include mq('sm') {
+                            font-size: 18px;
+                            line-height: 31.5px;
+                        }
+                        @include mq('md') {
+                            width: 100%;
+                            font-size: 20px;
+                            line-height: 35px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+//実際の活用例
+    .project-ex-wrapper {
+        padding-top: 80px;
+        padding-bottom: 80px;
+        background-color: #EDEDED;
+        @include mq('sm') {
+            padding-top: 105px;
+            padding-bottom: 120px;
+        }
+        @include mq('md') {
+            padding: 80px 0;
+            background-color: #FFF;
+        }
+        .project-ex-contents {
+            @include mq('sm') {
+                width: 90%;
+                display: block;
+                margin: 0 auto;
+            }
+            @include mq('md') {
+                width: 100%;
+                max-width: 1180px;
+                display: block;
+                margin: 0 auto;
+                padding: 80px 20px;
+                background-color: #EDEDED;
+            }
+            .project-ex-title {
+                display: block;
+                margin: 0 auto;
+                text-align: center;
+                padding-bottom: 49px;
+                @include mq('sm') {
+                    padding-bottom: 64px;
+                }
+                @include mq('md') {
+                    text-align: left;
+                }
+                p {
+                font-size: 20px;
+                text-align: center;
+                color: #Fff;
+                font-weight: bold;
+                background-color: #38302B;
+                border-radius: 40px;
+                padding: 10px 38px;
+                margin-bottom: 49px;
+                display: inline;
+                @include mq('sm') {
+                    font-size: 26px;
+                    padding: 15px 45px;
+                    line-height: 52px;
+                    letter-spacing: 1.3px;
+                }
+                }
+            }
+            .project-ex-text-items {
+                @include mq('md') {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+                .project-ex-flow {
+                    padding-bottom: 154px;
+                    @include mq('sm') {
+                        padding-bottom: 42px;
+                    }
+                    @include mq('md') {
+                        width: 45%;
+                    }
+                }
+                .project-ex-text {
+                    display: none;
+                    @include mq('sm') {
+                        display: block;
+                        font-size: 24px;
+                        text-align: center;
+                        line-height: 42px;
+                        padding-bottom: 42px;
+                    }
+                    @include mq('md') {
+                        width: 50%;
+                        text-align: left;
+                    }
+                }
+            }
+            .project-ex-flow-items {
+                @include mq('sm') {
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+                .project-ex-flow-item {
+                    padding-bottom: 80px;
+                    width: 80%;
+                    max-width: 280px;
+                    display: block;
+                    margin: 0 auto;
+                    @include mq('sm') {
+                        width: 50%;
+                        padding-bottom: 64px;
+                        max-width: 260px;
+                    }
+                    @include mq('md') {
+                        width: 25%;
+                        max-width: 220px;
+                    }
+                    .pe-flow-arrow {
+                        padding-bottom: 24px;
+                        @include mq('md') {
+                            padding-bottom: 40px;
+                        }
+                    }
+                    .pe-flow-img {
+                        width: 200px;
+                        display: block;
+                        margin: 0 auto;
+                    }
+                }
+            }
+        }
+    }
+
+//お問い合わせ促進
+    .project-contact-wrapper {
+        padding-top: 120px;
+        @include mq('sm') {
+            padding-top: 164px;
+        }
+        @include mq('md') {
+            padding-top: 200px;
+        }
+        .project-contact-text {
+            font-size: 26px;
+            text-align: center;
+            line-height: 45.5px;
+            font-weight: bold;
+            padding-bottom: 32px;
+            @include mq('sm') {
+                padding-bottom: 40px;
+            }
+            @include mq('md') {
+                font-size: 36px;
+            }
+        }
+        .project-contact-btn {
+            width: 280px;
+            display: block;
+            text-align: center;
+            margin: 0 auto;
+            transform-box: fill-box;
+        }
+    }
+
+    //contact 
+    .contact-bg {
+        position: relative;
+        padding-bottom: 37px;
+        @include mq('sm') {
+            padding-bottom: 89px;
+        }
+        @include mq('md') {
+            padding-bottom: 115px;
+        }
+        .contact-top-sp {
+            display: block;
+            @include mq('sm') {
+                display: none;
+            }
+        }
+        .contact-top-tb {
+            display: none;
+            @include mq('sm') {
+                display: block;
+            }
+            @include mq('md') {
+                display: none;
+            }
+        }
+        .contact-top-pc {
+            display: none;
+            @include mq('md') {
+                display: block;
+            }
+        }
+        .contact-top-title {
+            display: none;
+            @include mq('sm') {
+            width: 140px;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 100px;
+            }
+            @include mq('md') {
+                width: 170px;
+            }
+        }
+    }
+
+    //request-document
+    .rd-bg {
+        position: relative;
+        padding-bottom: 37px;
+        @include mq('sm') {
+            padding-bottom: 85px;
+        }
+        @include mq('md') {
+            padding-bottom: 115px;
+        }
+        .rd-top-sp {
+            display: block;
+            @include mq('sm') {
+                display: none;
+            }
+        }
+        .rd-top-tb {
+            display: none;
+            @include mq('sm') {
+                display: block;
+            }
+            @include mq('md') {
+                display: none;
+            }
+        }
+        .rd-top-pc {
+            display: none;
+            @include mq('md') {
+                display: block;
+            }
+        }
+        .rd-top-title {
+            display: none;
+            @include mq('sm') {
+            width: 140px;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 100px;
+            }
+            @include mq('md') {
+                width: 170px;
+            }
+            img {
+                @include mq('sm') {
+                    width: 140px;
+                }
+                @include mq('md') {
+                    width: 170px;
+                }
+            }
+        }
+    }
+
+    //サンクスページ 
+    .thanks-bg {
+        position: relative;
+        padding-bottom: 37px;
+        @include mq('sm') {
+            padding-bottom: 85px;
+        }
+        @include mq('md') {
+            padding-bottom: 171px;
+        }
+        .thanks-top-sp {
+            display: block;
+            @include mq('sm') {
+                display: none;
+            }
+        }
+        .thanks-top-tb {
+            display: none;
+            @include mq('sm') {
+                display: block;
+            }
+            @include mq('md') {
+                display: none;
+            }
+        }
+        .thanks-top-pc {
+            display: none;
+            @include mq('md') {
+                display: block;
+            }
+        }
+        .thanks-top-title {
+            display: none;
+            @include mq('sm') {
+            width: 140px;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 100px;
+            }
+            @include mq('md') {
+                width: 170px;
+            }
+        }
+    }
+    
+    //お問い合わせページ
+    .contact-wrapper {
+        padding-bottom: 160px;
+        font-family:  'コーポレート明朝','Noto Serif JP', serif;
+        @include mq('sm') {
+            padding-bottom: 120px;
+        }
+        .contact-top {
+            font-size: 16px;
+            line-height: 32px;
+            padding-bottom: 80px;
+            @include mq('sm') {
+                padding-bottom: 95px;
+            }
+            @include mq('md') {
+                padding-bottom: 64px;
+                max-width: 810px;
+                display: block;
+                margin: 0 auto;
+            }
+        }
+        form {
+            .contact-items {
+                max-width: 810px;
+                display: block;
+                margin: 0 auto;
+                width: 100%;
+                .c-item {
+                    display: block;
+                    margin-bottom: 40px;
+                    @include mq('sm') {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                    label {
+                        display: block;
+                    }
+                    .c-red {
+                        color: #F71735;
+                    }
+                    .c-title {
+                        display: block;
+                        font-size: 16px;
+                        font-weight: bold;
+                        margin-bottom: 5px;
+                        display: flex;
+                        position: relative;
+                        @include mq('sm') {
+                            padding-top: 12px;
+                        }
+                    }
+                    .c-name {
+                        position: relative;
+                        &:after {
+                            position: absolute;
+                            content: "*";
+                            color: red;
+                            left: 48px;
+                        }
+                    }
+                    .c-contact {
+                        position: relative;
+                        padding-bottom: 5px;
+                        &:after {
+                            position: absolute;
+                            content: "*";
+                            color: red;
+                            left: 98px;
+                        }
+                    }
+                    .c-mail {
+                        position: relative;
+                        &:after {
+                            position: absolute;
+                            content: "*";
+                            color: red;
+                            left: 83px;
+                        }
+                    }
+                    .c-confirm {
+                        position: relative;
+                        &:after {
+                            position: absolute;
+                            content: "*";
+                            color: red;
+                            left: 131px;
+                        }
+                    }
+                    .c-kind {
+                        position: relative;
+                        &:after {
+                            position: absolute;
+                            content: "*";
+                            color: red;
+                            left: 121px;
+                        }
+                    }
+                    .c-add {
+                        position: relative;
+                        &:after {
+                            position: absolute;
+                            content: "*";
+                            color: red;
+                            left: 47px;
+                        }
+                    }
+                    .c-tel {
+                        position: relative;
+                        &:after {
+                            position: absolute;
+                            content: "*";
+                            color: red;
+                            left: 67px;
+                        }
+                    }
+                    input[type="text"], input[type="email"] {
+                        height: 50px;
+                        width: 100%;
+                        padding-left: 4%;
+                        border: 1px solid #B5B5B5;
+                        line-height: 24px;
+                        &::placeholder {
+                            font-size: 16px;
+                            line-height: 30px;
+                            color: #B5B5B5;
+                        }
+                        @include mq('sm') {
+                            width: 100%;
+                        }
+                    }
+                    dd {
+                        @include mq('sm') {
+                            width: 72%;
+                        }
+                        #zip {
+                            width: 50% !important;
+                        }
+                    }
+                    .select-item {
+                        position: relative;
+                        &:after {
+                            content: '';
+                            width: 6px;
+                            height: 6px;
+                            border: 0px;
+                            border-bottom: solid 2px #b5b5b5;
+                            border-right: solid 2px #B5B5B5;
+                            -ms-transform: rotate(45deg);
+                            -webkit-transform: rotate(45deg);
+                            transform: rotate(45deg);
+                            position: absolute;
+                            top: 50%;
+                            right: 5%;
+                            margin-top: -4px;
+                            z-index: 10;
+                            @include mq('sm') {
+                                top: 50%;
+                                right: 2%;
+                            }
+                            @include mq('md') {
+                                right: 3%;
+                                top: 45%;
+                            }
+                        }
+                        select {
+                            width: 100%;
+                            height: 50px;
+                            border: 1px solid #B5B5B5;
+                            font-size: 16px;
+                            position: relative;
+                            line-height: 24px;
+                            color: #B5B5B5;
+                            padding-left: 20px;
+                            -webkit-appearance: none;
+                        }
+                    }
+                    textarea {
+                        width: 100%;
+                        border: 1px solid #B5B5B5;
+                        line-height: 24px;
+                        padding-left: 4%;
+                        &::placeholder {
+                            font-size: 16px;
+                            line-height: 24px;
+                            color: #B5B5B5;
+                            padding-top: 14px;
+                        }
+                        @include mq('sm') {
+                            width: 100%;
+                        }
+                    }               
+                }
+                .c-add-item {
+                    input {
+                        margin-bottom: 10px;
+                    }
+                    #zip11 {
+                        width: 50%;
+                    }
+                }
+                .radio-input{
+                    display: none;
+                  }
+                  .radio-input + label{
+                    padding-left: 40px;
+                    position:relative;
+                    margin-right: 20px;
+                  }
+                  .radio-input + label::before{
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: -5px;
+                    left: 0;
+                    width: 30px;
+                    height: 30px;
+                    border: 1px solid #999;
+                    border-radius: 50%;
+                  }
+                  .radio-input:checked + label::after{
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 2px;
+                    left: 7px;
+                    width: 18px;
+                    height: 18px;
+                    background: $color;
+                    border-radius: 50%;
+                  }
+                .check-item {
+                    margin-bottom: 63px;
+                    .checkbox-input {
+                        display: none;
+                    }
+                    .checkbox-input:checked + .checkbox-text{
+                        &:after {
+                            content: "";
+                        display: block;
+                        position: absolute;
+                        top: -2px;
+                        left: 11px;
+                        width: 7px;
+                        height: 14px;
+                        transform: rotate(40deg);
+                        border-bottom: 2px solid #98A6B5;
+                        border-right: 2px solid #98A6B5;
+                        }
+                      }
+                    .checkbox-text {
+                        position:relative;
+                        margin-right: 20px;
+                        padding-left: 40px;
+                        &:before {
+                            content: "";
+                            display: block;
+                            position: absolute;
+                            top: -7px;
+                            left: 0;
+                            width: 30px;
+                            height: 30px;
+                            border: 1px solid #999;
+                        }
+                        a {
+                            color: $text-color;
+                            display: inline-block;
+                            border-bottom: 1px solid $text-color;
+                        }
+                    }
+                    @include mq('sm') {
+                        width: 72%;
+                        display: block;
+                        margin-left: auto;
+                    }
+                }
+                .c-pp {
+                    display: none;
+                }
+            }
+            input[type="button"] {
+                color: #fff;
+                background-color: $color;
+                border: none;
+                font-size: 16px;
+                font-weight: bold;
+                padding: 13px 124px;
+                border-radius: 24px;
+                text-align: center;
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    //safari用 フォーム文字サイズ文字位置
+    _::-webkit-full-page-media, _:future, :root .c-title {
+        font-size: 14px !important;
+    }
+
+    _::-webkit-full-page-media, _:future, :root .c-mail::after {
+        left: 100px !important;
+    }
+    _::-webkit-full-page-media, _:future, :root .c-confirm::after {
+        left: 140px !important;
+    }
+    _::-webkit-full-page-media, _:future, :root .c-name::after {
+        left: 44px !important;
+
+    }
+    _::-webkit-full-page-media, _:future, :root .c-tel::after {
+        left: 60px !important;
+    }
+    
+    _::-webkit-full-page-media, _:future, :root .c-add::after {
+        left: 45px !important;
+    }
+    _::-webkit-full-page-media, _:future, :root .c-kind::after {
+        left: 115px !important;
+    }
+
+
+//firefox用 フォームの幅
+@-moz-document url-prefix(){
+        input {
+            height: 35px !important;
+        }
+        select {
+            height: 35px !important;
+        }
+    }
+      
+//IE用 選択ボックスボーダーなし
+    @media all and (-ms-high-contrast: none){
+        .select-item::after {
+            border-bottom: 0px solid transparent;
+            border-right: 0px solid transparent;
+            width: 0;
+            height: 0;
+        }
+      }
+
+//プライバシーポリシー
+    .pp-wrapper {
+        padding-top: 80px;
+        padding-bottom: 20px;
+        @include mq('sm') {
+            padding-bottom: 40px;
+        }
+        @include mq('md') {
+            padding-top: 137px;
+            padding-bottom: 220px;
+        }
+        .pp-contents {
+            .pp-title {
+                color: $color;
+                font-size: 31px;
+                text-align: center;
+                padding-bottom: 12px;
+                position: relative;
+                margin-bottom: 12px;
+                font-family: "コーポレート明朝";
+                &:after {
+                    position: absolute;
+                    content: "";
+                    display: block;
+                    background-color: $color;
+                    height: 5px;
+                    width: 50px;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    top: 90%;
+                }
+                @include mq('sm') {
+                    font-size: 54px;
+                    &:after {
+                        width: 70px;
+                    }
+                }
+            }
+            .pp-subtitle {
+                text-align: center;
+                font-size: 20px;
+                padding-bottom: 80px;
+                font-family: "コーポレート明朝";
+                @include mq('sm') {
+                    font-size: 24px;
+                }
+                @include mq('md') {
+                    padding-bottom: 150px;
+                }
+            }
+            .pp-select {
+                display: none;
+                @include mq('sm') {
+                    display: block;
+                    padding-bottom: 160px;
+                    .pp-select-text {
+                        display: flex;
+                        justify-content: space-between;
+                        padding-bottom: 35px;
+                        p {
+                            font-size: 12px;
+                            @include mq('md') {
+                                font-size: 16px;
+                            }
+                        }
+                        a {
+                            font-size: 12px;
+                            color: $text-color;
+                            padding-bottom: 3px;
+                            border-bottom: 1px solid #98A6B5;
+                            @include mq('md') {
+                                font-size: 16px;
+                            }
+                            &:hover {
+                                opacity: 0.7;
+                            } 
+                        }
+                    }
+                    .pp-link{
+                        background-color: #f5f5f5;
+                        height: 10px;
+                        width: 100%;
+                        div {
+                            background-color: $color;
+                        }
+                        .pp-1 {
+                            width: 30%;
+                            height: 10px;
+                            width: 215px;
+                            @include mq('md') {
+                                width: 287px;
+                            }
+                        }
+                        .pp-2 {
+                            width: 20%;
+                            height: 10px;
+                            display: block;
+                            margin-left: 47%;
+                            width: 100px;
+                            @include mq('md') {
+                                width: 128px;
+                                margin-left: 48%;
+                            }                            
+                        }
+                        .pp-3 {
+                            width: 20%;
+                            height: 10px;
+                            display: block;
+                            margin-left: auto;
+                            width: 160px;
+                            @include mq('md') {
+                                width: 208px;
+                            }
+                        }
+                    }
+                }
+                @include mq('md') {
+                    padding-bottom: 190px;
+                }
+            }
+            .pp-text-contents {
+                line-height: 32px;
+                padding-bottom: 200px;
+                @include mq('sm') {
+                    padding-bottom: 40px;
+                }
+                @include mq('md') {
+                    padding-bottom: 100px;
+                }
+                .pp-text-title {
+                    text-align: center;
+                    font-size: 20px;
+                    line-height: 35px;
+                    padding-bottom: 34px;
+                    @include mq('sm') {
+                        font-size: 24px;
+                        padding-bottom: 80px;
+                    }
+                    @include mq('md') {
+                        text-align: left;
+                        padding-bottom: 90px;
+                        font-size: 26px;
+                    }
+                }
+                .pp-text {
+                    font-size: 16px;
+                    line-height: 32px;
+                    ul {
+                        li{
+                            font-size: 16px; 
+                            line-height: 32px;
+                        }
+                    }
+                }
+                a {
+                    color: $text-color;
+                    border-bottom: 1px solid $text-color;
+                    font-size: 12px;
+                    @include mq('sm') {
+                        font-size: 16px;
+                    }
+                }
+                .pp-left {
+                    padding-left: 20px;
+                }
+            }
+            .pp-btm-link {
+                width: 70%;
+                padding-bottom: 110px;
+                @include mq('sm') {
+                    display: none;
+                }
+                a {
+                    display: block;
+                    margin-bottom: 20px;
+                    &:hover {
+                        opacity: 0.7;
+                    }
+                    .pp-btm-item {
+                        display: flex;
+                        p {
+                            font-size: 12px;
+                        }
+                        img {
+                            width: 11px;
+                            margin-left: 4px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //recruit 
+    .recruit-bg {
+        position: relative;
+        width: 100%;
+        padding-bottom: 37px;
+        @include mq('sm') {
+            padding-bottom: 137px;
+        }
+        @include mq('md') {
+            padding-bottom: 270px;
+        }
+        .recruit-bg-sp {
+            display: block;
+            @include mq('sm') {
+                display: none;
+            }
+        }
+        .recruit-bg-tb {
+            display: none;
+            @include mq('sm') {
+                display: block;
+            }
+            @include mq('md') {
+                display: none;
+            }
+        }
+        .recruit-bg-pc {
+            display: none;
+            @include mq('md') {
+                display: block;
+            }
+        }
+        .recruit-top-title {
+            display: none;
+            @include mq('sm') {
+            width: 140px;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 100px;
+            }
+            @include mq('md') {
+                width: 170px;
+            }
+        }
+    }
+    .recruit-wrapper {
+        .recruit-top-text {
+            font-size: 16px;
+            text-align: center;
+            line-height: 32px;
+            padding-bottom: 120px;
+            @include mq('sm') {
+                padding-bottom: 104px;
+            }
+            @include mq('md') {
+                font-size: 23px;
+                line-height: 52px;
+                letter-spacing: 1.3px;
+                padding-bottom: 150px;
+            }
+            @include mq('lg') {
+                font-size: 26px;
+                padding-bottom: 199px;
+            }
+        }
+        .recruit-contents {
+                padding-bottom: 120px;
+                @include mq('md') {
+                width: 894px;
+                display: block;
+                margin: 0 auto;
+                }
+            .recruit-title {
+                color: $color;
+                font-size: 31px;
+                text-align: center;
+                padding-bottom: 12px;
+                position: relative;
+                margin-bottom: 12px;
+                font-family: "コーポレート明朝";
+                &:after {
+                    position: absolute;
+                    content: "";
+                    display: block;
+                    background-color: $color;
+                    height: 5px;
+                    width: 50px;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    top: 90%;
+                }
+                @include mq('sm') {
+                    font-size: 54px;
+                    &:after {
+                        width: 70px;
+                    }
+                }
+                @include mq('md') {
+                    font-size: 68px;
+                    margin-bottom: 24px;
+                    &:after{
+                        top: 95%;
+                        height: 7px;
+                    }
+                }
+            }
+            .recruit-subtitle {
+                text-align: center;
+                font-size: 20px;
+                padding-bottom: 52.5px;
+                font-family: "コーポレート明朝";
+                @include mq('sm') {
+                    font-size: 24px;
+                    padding-bottom: 96.5px;
+                }
+                @include mq('md') {
+                    padding-bottom: 165px;
+                }
+            }
+            .recruit-section-title {
+                color: #00377E;
+                background-color: #EDEDED;
+                padding-top: 10px;
+                padding-left: 10px;
+                padding-bottom: 10px;
+                font-size: 16px;
+                @include mq('sm') {
+                    font-size: 20px;
+                    padding-left: 16px;
+                    margin-bottom: 15px;
+                }
+            }
+            .recruit-about-items {
+                .recruit-about-item {
+                    padding-top: 24px;
+                    padding-bottom: 24px;
+                    border-bottom: 1px solid $text-color;
+                    &:nth-last-child() {
+                        padding-bottom: 1px solid transparent
+                    }
+                    @include mq('sm') {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                    .recruit-about-title {
+                        font-weight: bold;
+                        padding-bottom: 9.5px;
+                        @include mq('sm') {
+                            width: 20%;
+                        }
+                    }
+                    .recruit-about-text {
+                        line-height: 28px;
+                        @include mq('sm') {
+                            width: 80%;
+                        }
+                        @include mq('md') {
+                            line-height: 32px;
+                        }
+                    }
+                    ul {
+                        li {
+                            line-height: 28px;
+                        }
+                    }
+                }
+                .recruit-about-bottom {
+                    padding-top: 120px;
+                    padding-bottom: 80px;
+                    @include mq('md') {
+                        padding-top: 200px;
+                    }
+                    .recruit-about-title {
+                       font-size: 20px;
+                       font-weight: bold;
+                       text-align: center;
+                       padding-bottom: 23.5px;
+                       @include mq('sm') {
+                           font-size: 26px;
+                           text-align: left;
+                           padding-bottom: 32px;
+                       }
+                    }
+                    .recruit-about-text {
+                        line-height: 28px;
+                        font-size: 16px;
+                        @include mq('md') {
+                            line-height: 32px;
+                        }
+                    }
+                    ul {
+                        li {
+                            line-height: 28px;
+                            @include mq('md') {
+                                line-height: 32px;
+                            }
+                        }
+                    }
+                }
+            }
+            .recruit-job-items {
+                .q-and-a-content {
+                    #acMenu {
+                        .ac-item {
+                            .ac-content {
+                                dt {
+                                    position: relative;
+                                    &:after {
+                                        position: absolute;
+                                        content: "";
+                                        background-color: $text-color;
+                                        height: 1px;
+                                        width: 100%;
+                                        bottom: 0px;
+                                    }
+                                    padding-top: 24px;
+                                    padding-bottom: 25px;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    .ac-top {
+                                        @include mq('sm') {
+                                            display: flex;
+                                            align-items: center;
+                                        }
+                                        .ac-title {
+                                            color: $color;
+                                            font-size: 26px;
+                                            padding-bottom: 5px;
+                                            padding-right: 20px;
+                                        }
+                                        .ac-jp {
+                                            font-size: 16px;
+                                        }
+                                    }
+                                    .ac-icon {
+                                        position: relative;
+                                        width: 35px;
+                                        display: block;
+                                    }
+                                }
+                                dd {
+                                    display: none;
+                                    padding-top: 40px;
+                                    @include mq('sm') {
+                                        padding-top: 64px;
+                                    }
+                                    @include mq('md') {
+                                        padding-top: 80px;
+                                    }
+                                    .dd-flex {
+                                        @include mq('md') {
+                                            display: flex;
+                                            justify-content: space-between;
+                                        }
+                                        .ac-img {
+                                            padding-bottom: 40px;
+                                            display: block;
+                                            margin: 0 auto;
+                                            width: 90%;
+                                            @include mq('sm') {
+                                                width: 70%;
+                                            }
+                                            @include mq('md') {
+                                                width: 29%;
+                                                width: 260px;
+                                                height: 260px;
+                                                object-fit: cover;
+                                            }
+                                            .acimg-st-only {
+                                                display: block;
+                                                @include mq('md') {
+                                                    display: none;
+                                                }
+                                            }
+                                            .acimg-pc-only {
+                                                display: none;
+                                                @include mq('md') {
+                                                    display: block;
+                                                } 
+                                            }
+                                        }
+                                        .ac-text-items {
+                                            @include mq('md') {
+                                                width: 62%;
+                                            }
+                                            .ac-text-item {
+                                                padding-bottom: 40px;
+                                                .ac-text-title {
+                                                    font-weight: bold;
+                                                    padding-bottom: 8px;
+                                                    font-size: 16px;
+                                                }
+                                                .ac-text {
+                                                    font-size: 16px;
+                                                    line-height: 28px;
+                                                    @include mq('md') {
+                                                        line-height: 32px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }                          
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .recruit-contact {
+            text-align: center;
+            font-size: 20px;
+            line-height: 35px;
+        }
+    }
+
+    @media all and (-ms-high-contrast: none) {
+        dt::after {
+            height: 0;
+            width: 0;
+            background-color: transparent;
+            position: static;
+        }
+      }
+
+//アコーディオンアイコン
+    .ac-icon:after {
+        content: url(../img/ac-plus.png);
+        position: absolute;
+        top: -20px;
+        right: 4px;
+        height: 35px;
+        width: 35px;
+    }
+    .ac-minus:after {
+        position: absolute;
+        content: url(../img/ac-close.png) !important;
+        z-index: 100;
+        top: -20px;
+        right: 4px;
+        height: 35px;
+        width: 35px;
+    }
+
+    
+
+    //トップへ戻る
+    .pagetop {
+        width: 64px;
+        display: block;
+        margin-left: auto;
+        @include mq('sm') {
+            width: 80px;
+        }
+    }

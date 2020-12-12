@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact - Jobterrace -</title>
+    <meta content="神奈川県の横浜にあるJobterraceです。
+    「人と仕事、そして、社会に未来を照らす」をモットーに、採用担当者様の様々な悩みに寄り添い解決のお手伝いをしています">
+    <meta property="og:title" content="Jobterrace">
+    <meta property="og:url" content="https://jobterrace.co.jp/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://jobterrace.co.jp/twitter-card.png">
+    <meta property="og:site_name" content="Jobterrace">
+    <meta property="og:description" content="神奈川の横浜にあるJobterraceです。
+    「人と仕事、そして、社会に未来を照らす」をモットーに、採用担当者様の様々な悩みに寄り添い解決のお手伝いをしています"> 
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@QgmRGPFNxh2gsHH">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/fv.png">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+    <link rel="stylesheet" href="/css/animate.css">
+    <script type="text/javascript" src="/js/wow.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mailform-rd/css/reset.css" />
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="mailform-rd/css/mailform.css" />
+
+</head>
+<body class="drawer drawer--right">
+    <header role="banner" id="header">
+        <!-- ナビメニュー部分 -->
+      <!-- ハンバーガーボタン -->
+      <nav class="NavMenu">
+        <div class="nav-img">
+            <img src="/img/fotter_logo-min.svg" alt="jobterrace">
+        </div>
+        <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="project.html">PROJECT</a></li>
+            <li><a href="service.html">SERVICE</a></li>
+            <li><a href="about.html">ABOUT US</a></li>
+            <li><a href="recruit.html">RECRUIT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+            <li><a href="request-documents.html">資料請求</a></li>
+        </ul>
+        </nav>
+        <div class="overlay"></div>
+        <!-- ハンバーガーメニュー部分 --> 
+        <div class="Toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+        </div>
+ 
+        <div class="header-content">
+            <div class="header-inner">
+                <div class="header-flex">
+                    <a href="index.html" class="header-logo">
+                        <img src="/img/logo-min.svg" alt="jobterrace">
+                    </a>
+                    <ul class="header-list">
+                        <a href="index.html"><li>HOME</li></a>
+                        <a href="project.html"><li>PROJECT</li></a>
+                        <a href="service.html"><li>SERVICE</li></a>
+                        <a href="about.html"><li>ABOUT US</li></a>
+                        <a href="recruit.html"><li>RECRUIT</li></a>
+                        <a href="contact.html"><li>CONTACT</li></a>
+                        <a href="request-documents.html" class="header-blue"><li>資料請求</li></a>                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <a href="index.html" class="header-sp">
+            <img src="/img/logo-min.svg" alt="jobterrace">
+        </a>
+    </header>
+	
+	<section class="rd-bg">
+        <div class="rd-top-sp">
+            <img src="/img/rd-top-sp-min.png" alt="request-document">
+        </div>
+        <div class="rd-top-tb">
+            <img src="/img/rd-top-tb-min.png" alt="request-document">
+        </div>
+        <div class="rd-top-pc">
+            <img src="/img/img_REQUEST DOCUMENTS@2x-min.png" alt="request-document">
+        </div>
+        <div class="rd-top-title wow fadeInDown">
+            <img src="img/rd-top-title-min.png" alt="request-document">
+        </div>
+    </section>
+
+	<section class="contact-wrapper">
+		<div class="container">
+			<h2 class="page-title wow fadeInUp">REQUEST<br> DOCUMENTS</h2>
+            <p class="page-sub-title wow fadeInUp">資料請求</p>
+            <p class="contact-top wow fadeInUp">ホームページをご覧いただきましてありがとうございます。<br class="tp-only"> 資料請求は、下記のフォームよりお問合せください。</p>
+			<form action="mailform-rd/php/mailform.php" method="post" id="mail_form">
+				<div class="contact-items">
+					<dl>
+						<div class="c-item">
+							<dt class="c-title c-name">お名前</dt>
+							<dd class="required"><input type="text" id="company" name="company" value=""  placeholder="入力してください"></dd>
+						</div>
+						<div class="c-item c-add-item">
+							<dt class="c-title c-add">ご住所</dt>
+							<dd class="required">
+								<input type="text" id="zip11" name="zip11" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','addr11','addr11');" placeholder="〒郵便番号">
+								<input type="text" id="addr11" name="addr11" size="60" placeholder="都道府県・市町村">
+								<input type="text" id="read_1" name="read_1" value=""  placeholder="番地・ビル名・マンション名">
+							</dd>
+						</div>
+						<div class="c-item">
+							<dt class="c-title c-tel">電話番号</dt>
+							<dd class="required"><input type="text" id="tel" name="tel" value="" placeholder="入力してください"></dd>
+						</div>
+						<div class="c-item">
+							<dt class="c-title c-mail">メールアドレス</dt>
+							<dd class="required"><input type="email" id="email" name="email" value="" placeholder="入力してください"></dd>			
+						</div>
+                        <div class="check-item">
+							<label>
+                                <dt class="c-pp">プライバシーポリシーに同意</dt>
+                                <dd class="required">
+                                    <input type="checkbox" name="checkbox[]" class="checkbox-input response" value="プライバリーポリシーに同意する" required>
+								    <span class="checkbox-text"><a href="privacy-policy-1.html">プライバシーポリシー</a>に同意</span>
+                                </dd>
+							</label>
+						</div>	
+				    </dl>
+				</div>	
+				<p id="form_submit"><input type="button" id="form_submit_button" value="送信する" /></p>
+			</form>
+		</div>
+	</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-items">
+            <div class="footer-center">
+                <ul class="footer-list">
+                    <a href="index.html"><li>HOME</li></a>
+                    <a href="project.html"><li>PROJECT</li></a>
+                    <a href="service.html"><li>SERVICE</li></a>
+                    <a href="about.html"><li>ABOUT US</li></a><br class="tb-only">
+                    <a href="recruit.html"><li>RECRUIT</li></a><br class="pc-only">
+                    <a href="contact.html"><li>CONTACT</li></a>
+                    <a href="request-documents.html"><li>資料請求</li></a>
+                </ul>
+                <ul class="footer-link">
+                    <a href="privacy-policy-1.html"><li>情報セキュリティ基本方針</li></a>
+                    <a href="privacy-policy-2.html"><li>個人情報保護方針</li></a><br class="tb-only">
+                    <a href="privacy-policy-3.html"><li>個人情報の取り扱いについて</li></a>
+                </ul>
+                <ul class="footer-sns">
+                    <li><a href="https://www.facebook.com/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%B8%E3%83%A7%E3%83%96%E3%83%86%E3%83%A9%E3%82%B9-109877394267321"><img src="/img/fb.png" alt="facebook"></a></li>
+                    <li><a href="https://www.instagram.com/jobterrace0/"><img src="/img/ig.png" alt="instagram"></a></li>
+                    <li><a href="https://twitter.com/QgmRGPFNxh2gsHH"><img src="/img/tw.png" alt="twitter"></a></li>
+                </ul>
+            </div>
+            <div class="footer-logo">
+                <img src="/img/fotter_logo-min.svg" alt="jobterrace">
+            </div>
+            <p class="footer-cp">Copyright ©jobterrace Co, Ltd. <br>All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="mailform-rd/js/mailform-js.php"></script>
+<script src="mailform-rd/js/ajaxzip3.js"></script>
+
+<script>
+	new WOW().init();
+</script>
+
+</body>
+</html>
